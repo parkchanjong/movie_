@@ -5,38 +5,7 @@ import './App.css';
 class App extends Component {
 	state = {};
 	componentDidMount() {
-		console.log('asdf');
-		setTimeout(() => {
-			this.setState({
-				movies: [
-					{
-						title: '1',
-						poster:
-							'https://images.unsplash.com/photo-1552668158-f8a225511bea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-					},
-					{
-						title: '2',
-						poster:
-							'https://images.unsplash.com/photo-1552690984-f6312c5a2456?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-					},
-					{
-						title: '3',
-						poster:
-							'https://images.unsplash.com/photo-1552664199-008d16422ef9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-					},
-					{
-						title: '4',
-						poster:
-							'https://images.unsplash.com/photo-1552694908-18a5257268f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-					},
-					{
-						title: '5',
-						poster:
-							'https://images.unsplash.com/photo-1552781899-a885fc899da2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-					},
-				],
-			});
-		}, 5000);
+		fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count');
 	}
 
 	_renderMovies = () => {
