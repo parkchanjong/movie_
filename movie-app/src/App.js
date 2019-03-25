@@ -5,7 +5,10 @@ import './App.css';
 class App extends Component {
 	state = {};
 	componentDidMount() {
-		fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count');
+		fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+			.then(res => res.json())
+			.then(json => console.log(json))
+			.catch(err => console.log(err));
 	}
 
 	_renderMovies = () => {
