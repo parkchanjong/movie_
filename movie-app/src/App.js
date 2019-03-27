@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import Movie from './Movie';
 import './App.css';
+import Movie from './Movie';
 
 class App extends Component {
+	// Render: componentWillMount() -> render() -> componentDidMount()
+	// Update componentWillReceiveProps() -> shouldComponentUpdate() -> componentWillUpdate() -> render() -> componentDidUpdate()
+
 	state = {};
+
 	componentDidMount() {
 		this._getMovies();
 	}
 
 	_renderMovies = () => {
 		const movies = this.state.movies.map(movie => {
-			console.log(movie);
 			return (
 				<Movie
 					title={movie.title_english}
-					poster={movie.small_cover_image}
+					poster={movie.large_cover_image}
 					key={movie.id}
 					genres={movie.genres}
 					synopsis={movie.synopsis}
@@ -32,14 +35,15 @@ class App extends Component {
 	};
 
 	_callApi = () => {
-		return fetch('https://yts.ag/api/v2/list_movies.json?sort_by=rating')
-			.then(res => res.json())
+		return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count')
+			.then(potato => potato.json())
 			.then(json => json.data.movies)
 			.catch(err => console.log(err));
 	};
 
 	render() {
-		return <div className="App">{this.state.movies ? this._renderMovies() : 'Loading'}</div>;
+		const { movies } = this.state;
+		return <div className={movies ? 'App' : 'App--loading'}>{movies ? this._renderMovies() : 'Loading'}</div>;
 	}
 }
 
